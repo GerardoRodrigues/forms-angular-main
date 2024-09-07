@@ -6,11 +6,11 @@
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="nome">Nome Completo</label>
-      <input name="nome" id="nome" class="campo__escrita" ngModel required minlength="3">
+      <input name="nome" id="nome" class="campo__escrita" ngModel required minlength="3" #nome="ngModel">
 
-      <div *ngIf="f.controls['nome']?.touched && f.controls['nome']?.invalid">
-        <span class="erro__texto" *ngIf="f.controls['nome']?.errors?.['required']">Nome é obrigatório.</span>
-        <span class="erro__texto" *ngIf="f.controls['nome']?.errors?.['minlength']">Nome deve conter no mínimo 3 caracteres.</span>
+      <div *ngIf="nome?.touched && nome?.invalid">
+        <app-mensagem *ngIf="nome?.errors?.['required']" mensagem="Nome é obrigatório."></app-mensagem>
+        <app-mensagem *ngIf="nome?.errors?.['minlength']" mensagem="Mínimo de 3 caracteres."></app-mensagem>
       </div>
     </div>
 
@@ -23,11 +23,11 @@
 
       <div class="formulario__campo">
         <label class="campo__etiqueta" for="telefone">Contato</label>
-        <input name="telefone" id="telefone" type="tel" placeholder="(XX) XXXXX-XXXX" class="campo__escrita" ngModel required pattern="\(?\d{2}\)?[\s-]?\d{4,5}[\s-]?\d{5}"/>
+        <input name="telefone" id="telefone" type="tel" placeholder="(XX) XXXXX-XXXX" class="campo__escrita" ngModel required pattern="\(?\d{2}\)?[\s-]?\d{4,5}[\s-]?\d{5}" #contato="ngModel"/>
 
-        <div *ngIf="f.controls['telefone']?.touched && f.controls['telefone']?.invalid">
-          <span class="erro__texto" *ngIf="f.controls['telefone']?.errors?.['required']">Contato obrigatório.</span>
-          <span class="erro__texto" *ngIf="f.controls['telefone']?.errors?.['pattern']">Contato inválido.</span>
+        <div *ngIf="contato?.touched && contato?.invalid">
+          <app-mensagem *ngIf="contato?.errors?.['required']" mensagem="Contato é obrigatório."></app-mensagem>
+          <app-mensagem *ngIf="contato?.errors?.['pattern']" mensagem="Contato inválido."></app-mensagem>
         </div>
       </div>
 
@@ -35,11 +35,11 @@
 
     <div class="formulario__campo">
       <label class="campo__etiqueta" for="email">E-mail</label>
-      <input name="email" id="email" type="email" class="campo__escrita" ngModel required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"/>
+      <input name="email" id="email" type="email" class="campo__escrita" ngModel required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" #email="ngModel"/>
 
-      <div *ngIf="f.controls['email']?.touched && f.controls['email']?.invalid">
-        <span class="erro__texto" *ngIf="f.controls['email']?.errors?.['required']">Email é obrigatório.</span>
-        <span class="erro__texto" *ngIf="f.controls['email']?.errors?.['pattern']">Email inválido.</span>
+      <div *ngIf="email?.touched && email?.invalid">
+        <app-mensagem *ngIf="email?.errors?.['required']" mensagem="Email é obrigatório."></app-mensagem>
+        <app-mensagem *ngIf="email?.errors?.['pattern']" mensagem="Email inválido."></app-mensagem>
       </div>
 
     </div>
