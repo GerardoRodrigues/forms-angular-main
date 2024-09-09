@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-import { NgForm, NgModel } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { ConsultaCepService } from '../services/consulta-cep.service';
 
 @Component({
@@ -23,7 +23,23 @@ export class CadastroComponent implements OnInit {
       }
   }
 
-  consultaCEP(ev: any){
-    return this.service.getConsultaCep(ev.target.value).subscribe(resultado => console.log(resultado));
+  consultaCEP(ev: any, f: NgForm){
+    const cep = ev.target.value;
+    if(cep !== ''){
+      this.service.getConsultaCep(cep).subscribe((resultado) => 
+      {
+        this.populandoEndereco(resultado, f);
+      });
+    }
+  }
+
+  populandoEndereco(dados: any, f: NgForm){
+    f.form.patchValue({
+      endereco: dados.logradouro,
+      complemento: dados.complemento,
+      bairro: dados.bairro,
+      cidade: dados.localidade,
+      estado: dados.uf
+    });
   }
 }
